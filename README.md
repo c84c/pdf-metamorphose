@@ -17,6 +17,7 @@ Backend:
 
 ## Run
 
-```bash
-docker compose -p pdf-metamorphose up --build
-```
+1. ```bash
+    docker compose -p pdf-metamorphose up --build
+    ```
+2. Open browser at [http://127.0.0.1:8501/](http://127.0.0.1:8501/)
