@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build:
+      dockerfile: Dockerfile.frontend
+      context: .
+    environment:
+      BACKEND_ROOT_URL: "http://backend:8080/"
+    ports:
+      - "8501:8501"
+  backend:
+    build:
+      dockerfile: Dockerfile.backend
+      context: .
+    ports:
+      - "8080:8080"

@@ -1,0 +1,26 @@
+FROM python:3.12-slim
+
+WORKDIR /frontend
+
+RUN apt-get update  \
+    && apt-get install -y \
+        build-essential \
+        curl \
+        git \
+        software-properties-common \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install poetry
+
+COPY /pyproject.toml .
+COPY /README.md .
+
+RUN poetry config virtualenvs.create false  \
+    && poetry install --no-root
+
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+COPY streamlit_app.py .
+
+ENTRYPOINT ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
